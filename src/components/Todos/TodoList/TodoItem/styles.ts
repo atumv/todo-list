@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { variables as v } from "@styles/variables";
+import styled from 'styled-components';
+import { variables as v } from '@styles/variables';
 
 export const StyledTodoItem = styled.label`
   @keyframes fade-out {
@@ -91,7 +91,7 @@ export const StyledTodoItem = styled.label`
     &__checkbox-wrap {
       display: flex;
       align-items: center;
-      max-width: 76%;
+      max-width: 80%;
     }
 
     &__remove-btn {
@@ -115,12 +115,12 @@ export const StyledTodoItem = styled.label`
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       bottom: 0;
-      right: 48px;
-      width: 20%;
+      right: 40px;
+      width: 10%;
       background: linear-gradient(
         to right,
         rgba(255, 255, 255, 0),
