@@ -24,7 +24,9 @@ export const TodoList: React.FC = () => {
       <ul className="todo-list">
         <InfiniteScroll
           loadMore={
-            allTodosSelected && currentPage <= pageCount && loadMoreTodos
+            allTodosSelected && currentPage <= pageCount
+              ? loadMoreTodos
+              : () => {}
           }
           hasMore={true}
           threshold={1}
