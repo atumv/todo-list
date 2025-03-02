@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ITodo, EditFormValues } from '@shared/interfaces';
+import { Todo, EditFormValues } from '@shared/interfaces';
 import { useTodoStore } from '@/store/todoStore';
 import { StyledTodoEdit } from './styles';
 import { Form } from 'antd';
@@ -14,7 +14,7 @@ export const TodoEditForm: React.FC = () => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    const selectedTodo = todos.find((todo: ITodo) => todo.attributes.selected);
+    const selectedTodo = todos.find((todo: Todo) => todo.attributes.selected);
 
     if (!selectedTodo) {
       form.setFieldsValue({

@@ -1,12 +1,12 @@
-import React from "react";
-import { useTodoStore } from "@/store/todoStore";
-import { ITodo } from "@/shared/interfaces";
-import { TodoListFilter } from "./TodoListFilter";
-import { TodoItem } from "./TodoItem";
-import { Loader } from "./Loader";
-import { NoTasksMsg } from "./NoTasksMsg";
-import { StyledTodoListContainer } from "./styles";
-import InfiniteScroll from "react-infinite-scroller";
+import React from 'react';
+import { useTodoStore } from '@/store/todoStore';
+import { Todo } from '@/shared/interfaces';
+import { TodoListFilter } from './TodoListFilter';
+import { TodoItem } from './TodoItem';
+import { Loader } from './Loader';
+import { NoTasksMsg } from './NoTasksMsg';
+import { StyledTodoListContainer } from './styles';
+import InfiniteScroll from 'react-infinite-scroller';
 
 export const TodoList: React.FC = () => {
   const {
@@ -34,7 +34,7 @@ export const TodoList: React.FC = () => {
           {loading && <Loader />}
           {!loading &&
             todos.length > 0 &&
-            todos.map((todo: ITodo, index: number) => (
+            todos.map((todo: Todo, index: number) => (
               <TodoItem todo={todo} key={index} index={index} />
             ))}
           {!loading && !todos.length && <NoTasksMsg />}

@@ -1,14 +1,14 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { ITodo, EditFormValues } from '@shared/interfaces';
+import { Todo, EditFormValues } from '@shared/interfaces';
 import { API_URL } from '@shared/constants/api';
 
 interface TodoState {
-  todos: ITodo[];
-  allTodos: ITodo[];
-  completedTodos: ITodo[];
-  uncompletedTodos: ITodo[];
-  favoriteTodos: ITodo[];
+  todos: Todo[];
+  allTodos: Todo[];
+  completedTodos: Todo[];
+  uncompletedTodos: Todo[];
+  favoriteTodos: Todo[];
   currentPage: number;
   pageCount: number;
   allTodosSelected: boolean;
@@ -61,7 +61,7 @@ export const useTodoStore = create<TodoState>()(
       },
 
       addTodo(title) {
-        const unselectedTodos = get().todos.map((todo: ITodo) => {
+        const unselectedTodos = get().todos.map((todo: Todo) => {
           todo.attributes.selected = false;
           return todo;
         });
@@ -84,7 +84,7 @@ export const useTodoStore = create<TodoState>()(
 
       selectTodo(index) {
         const todosWithOneSelected = get().todos.map(
-          (todo: ITodo, idx: number) => {
+          (todo: Todo, idx: number) => {
             idx === index
               ? (todo.attributes.selected = true)
               : (todo.attributes.selected = false);
@@ -98,7 +98,7 @@ export const useTodoStore = create<TodoState>()(
       editTodo(values) {
         const { title, description, status } = values;
 
-        const todosWithOneChanged = get().todos.map((todo: ITodo) => {
+        const todosWithOneChanged = get().todos.map((todo: Todo) => {
           if (todo.attributes.selected) {
             todo.attributes.title = title;
             todo.attributes.description = description;
@@ -112,16 +112,16 @@ export const useTodoStore = create<TodoState>()(
       },
 
       removeTodo(id) {
-        const todos = get().todos.filter((todo: ITodo) => todo.id !== id);
-        const allTodos = get().allTodos.filter((todo: ITodo) => todo.id !== id);
+        const todos = get().todos.filter((todo: Todo) => todo.id !== id);
+        const allTodos = get().allTodos.filter((todo: Todo) => todo.id !== id);
         const completedTodos = get().completedTodos.filter(
-          (todo: ITodo) => todo.id !== id
+          (todo: Todo) => todo.id !== id
         );
         const uncompletedTodos = get().uncompletedTodos.filter(
-          (todo: ITodo) => todo.id !== id
+          (todo: Todo) => todo.id !== id
         );
         const favoriteTodos = get().favoriteTodos.filter(
-          (todo: ITodo) => todo.id !== id
+          (todo: Todo) => todo.id !== id
         );
 
         set({ todos: todos });
@@ -150,7 +150,7 @@ export const useTodoStore = create<TodoState>()(
 
       showCompletedTodos() {
         const completedTodos = get().allTodos.filter(
-          (todo: ITodo) => todo.attributes.status === 'Выполнена'
+          (todo: Todo) => todo.attributes.status === 'Выполнена'
         );
         set({ completedTodos: completedTodos });
         set({ todos: get().completedTodos });
@@ -160,7 +160,7 @@ export const useTodoStore = create<TodoState>()(
 
       showUncompletedTodos() {
         const uncompletedTodos = get().allTodos.filter(
-          (todo: ITodo) => todo.attributes.status === 'Не выполнена'
+          (todo: Todo) => todo.attributes.status === 'Не выполнена'
         );
         set({ uncompletedTodos: uncompletedTodos });
         set({ todos: get().uncompletedTodos });
@@ -170,7 +170,7 @@ export const useTodoStore = create<TodoState>()(
 
       showFavoriteTodos() {
         const favoriteTodos = get().allTodos.filter(
-          (todo: ITodo) => todo.attributes.status === 'Избранное'
+          (todo: Todo) => todo.attributes.status === 'Избранное'
         );
         set({ favoriteTodos: favoriteTodos });
         set({ todos: get().favoriteTodos });
