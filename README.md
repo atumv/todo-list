@@ -1,5 +1,7 @@
 # Todo List
 
+![preview](/assets/preview.png)
+
 Simple todo list application built with React & TypeScript.
 
 The project is based on [`Create React App`](https://github.com/facebook/create-react-app).
