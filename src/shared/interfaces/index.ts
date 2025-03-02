@@ -10,3 +10,9 @@ export interface ITodo {
     selected?: boolean;
   };
 }
+
+export interface EditFormValues {
+  title: string;
+  description: string;
+  status: string;
+}

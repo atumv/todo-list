@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { ITodo } from "@shared/interfaces";
-import { useTodoStore } from "@/store/todoStore";
-import { StyledTodoEdit } from "./styles";
-import { Form } from "antd";
-import { TodoTitle } from "./TodoTitle";
-import { TodoDescription } from "./TodoDescription";
-import { TodoStatus } from "./TodoStatus";
-import { SaveBtn } from "./SaveBtn";
+import React, { useEffect } from 'react';
+import { ITodo, EditFormValues } from '@shared/interfaces';
+import { useTodoStore } from '@/store/todoStore';
+import { StyledTodoEdit } from './styles';
+import { Form } from 'antd';
+import { TodoTitle } from './TodoTitle';
+import { TodoDescription } from './TodoDescription';
+import { TodoStatus } from './TodoStatus';
+import { SaveBtn } from './SaveBtn';
 
 export const TodoEditForm: React.FC = () => {
   const { todos, editTodo } = useTodoStore();
@@ -18,23 +18,23 @@ export const TodoEditForm: React.FC = () => {
 
     if (!selectedTodo) {
       form.setFieldsValue({
-        title: "",
-        description: "",
-        status: "",
+        title: '',
+        description: '',
+        status: '',
       });
     } else {
       form.setFieldsValue({
         title: selectedTodo.attributes.title,
         description: selectedTodo.attributes.description,
         status:
-          (selectedTodo.attributes.status === "Выполнена" && "Выполнена") ||
-          (selectedTodo.attributes.status === "Избранное" && "Избранное") ||
-          "Не выполнена",
+          (selectedTodo.attributes.status === 'Выполнена' && 'Выполнена') ||
+          (selectedTodo.attributes.status === 'Избранное' && 'Избранное') ||
+          'Не выполнена',
       });
     }
   }, [todos]);
 
-  const handleFormSubmit = (values: any): void => {
+  const handleFormSubmit = (values: EditFormValues): void => {
     editTodo(values);
   };
 
