@@ -1,10 +1,16 @@
-import React from "react";
-import { StyledTodoTitle } from "./styles";
+import React from 'react';
+import { StyledTodoTitle } from './styles';
 
 interface TodoTitleProps {
-  props: boolean;
+  value?: string;
+  onChange?: () => void;
+  id?: string;
 }
 
-export const TodoTitle: React.FC<TodoTitleProps> = (props) => (
-  <StyledTodoTitle {...props} />
-);
+export const TodoTitle: React.FC<TodoTitleProps> = ({
+  value,
+  onChange,
+  id,
+}) => {
+  return <StyledTodoTitle value={value} onChange={onChange} id={id} />;
+};

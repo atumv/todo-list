@@ -1,12 +1,20 @@
-import React from "react";
-import { StyledSaveBtn } from "./styles.ts";
+import React from 'react';
+import { StyledSaveBtn } from './styles.ts';
 
-interface saveBtnProps {
-  props: boolean;
+interface SaveBtnProps {
+  value?: string;
+  onChange?: () => void;
+  id?: string;
 }
 
-export const SaveBtn: React.FC<saveBtnProps> = (props) => (
-  <StyledSaveBtn type="primary" htmlType="submit" {...props}>
+export const SaveBtn: React.FC<SaveBtnProps> = ({ value, onChange, id }) => (
+  <StyledSaveBtn
+    type="primary"
+    htmlType="submit"
+    value={value}
+    onChange={onChange}
+    id={id}
+  >
     Сохранить
   </StyledSaveBtn>
 );

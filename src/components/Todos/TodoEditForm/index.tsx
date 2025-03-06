@@ -42,17 +42,17 @@ export const TodoEditForm: React.FC = () => {
     <StyledTodoEdit>
       <Form form={form} onFinish={handleFormSubmit}>
         <Form.Item name="title">
-          <TodoTitle props />
+          <TodoTitle />
         </Form.Item>
         <Form.Item name="description">
-          <TodoDescription props />
+          <TodoDescription />
         </Form.Item>
         <div className="controls-container">
           <Form.Item name="status">
-            <TodoStatus props />
+            <TodoStatus />
           </Form.Item>
           <Form.Item>
-            <SaveBtn props />
+            <SaveBtn />
           </Form.Item>
         </div>
       </Form>
