@@ -1,18 +1,17 @@
-import React from "react";
-import { StyledFormContainer } from "./styles";
-import { Form, Space, Button, Input } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import { useTodoStore } from "@/store/todoStore";
+import React from 'react';
+import { StyledFormContainer } from './styles';
+import { Form, Space, Button, Input } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { useTodoStore } from '@/store/todoStore';
 
 export const TodoAddForm: React.FC = () => {
   const { addTodo, showAllTodos } = useTodoStore();
 
   const [form] = Form.useForm();
 
-  const handleFormSubmit = ({ input }: any): void => {
+  const handleFormSubmit = ({ input }: { input: string }): void => {
     showAllTodos();
-    const inputValue = input;
-    if (inputValue) addTodo(inputValue);
+    if (input.trim()) addTodo(input);
     form.resetFields();
   };
 
