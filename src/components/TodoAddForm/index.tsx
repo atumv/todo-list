@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyledFormContainer } from './styles';
 import { Form, Space, Button, Input } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
 import { useTodoStore } from '@/store/todoStore';
 
 export const TodoAddForm: React.FC = () => {
@@ -28,8 +27,13 @@ export const TodoAddForm: React.FC = () => {
               />
             </Form.Item>
             <Form.Item name="button">
-              <Button type="primary" size="large" htmlType="submit">
-                <PlusOutlined />
+              <Button
+                type="primary"
+                size="large"
+                htmlType="submit"
+                data-testid="addButton"
+              >
+                <span className="add-btn__plus">&times;</span>
                 Добавить
               </Button>
             </Form.Item>
