@@ -19,7 +19,7 @@ export const TodoStatus: React.FC<TodoStatusProps> = ({
         { value: 'Выполнена', label: 'Выполнена' },
         { value: 'Избранное', label: 'Избранное' },
       ]}
-      value={value}
+      value={value ? value : 'Статус задачи'}
       onChange={onChange}
       id={id}
       data-testid="todoStatus"
