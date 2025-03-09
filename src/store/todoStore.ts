@@ -97,7 +97,7 @@ export const useTodoStore = create<TodoState>()(
       editTodo(values) {
         const { title, description, status } = values;
 
-        const todosWithOneChanged = get().todos.map((todo: Todo) => {
+        const todosWithOneChanged = get().allTodos.map((todo: Todo) => {
           if (todo.attributes.selected) {
             todo.attributes.title = title;
             todo.attributes.description = description;
@@ -106,8 +106,7 @@ export const useTodoStore = create<TodoState>()(
           return todo;
         });
 
-        set({ todos: todosWithOneChanged });
-        set({ allTodos: get().todos });
+        set({ allTodos: todosWithOneChanged });
       },
 
       removeTodo(id) {
