@@ -148,9 +148,14 @@ export const useTodoStore = create<TodoState>()(
       },
 
       showCompletedTodos() {
-        const completedTodos = get().allTodos.filter(
-          (todo: Todo) => todo.attributes.status === 'Выполнена'
-        );
+        const completedTodos = get().allTodos.filter((todo: Todo) => {
+          if (
+            todo.attributes.status === 'Выполнена' ||
+            todo.attributes.status === 'completed'
+          ) {
+            return todo;
+          }
+        });
         set({ completedTodos: completedTodos });
         set({ todos: get().completedTodos });
         set({ allTodosSelected: false });
@@ -158,9 +163,14 @@ export const useTodoStore = create<TodoState>()(
       },
 
       showUncompletedTodos() {
-        const uncompletedTodos = get().allTodos.filter(
-          (todo: Todo) => todo.attributes.status === 'Не выполнена'
-        );
+        const uncompletedTodos = get().allTodos.filter((todo: Todo) => {
+          if (
+            todo.attributes.status === 'Не выполнена' ||
+            todo.attributes.status === 'active'
+          ) {
+            return todo;
+          }
+        });
         set({ uncompletedTodos: uncompletedTodos });
         set({ todos: get().uncompletedTodos });
         set({ allTodosSelected: false });
@@ -168,9 +178,14 @@ export const useTodoStore = create<TodoState>()(
       },
 
       showFavoriteTodos() {
-        const favoriteTodos = get().allTodos.filter(
-          (todo: Todo) => todo.attributes.status === 'Избранное'
-        );
+        const favoriteTodos = get().allTodos.filter((todo: Todo) => {
+          if (
+            todo.attributes.status === 'Избранное' ||
+            todo.attributes.status === 'favorite'
+          ) {
+            return todo;
+          }
+        });
         set({ favoriteTodos: favoriteTodos });
         set({ todos: get().favoriteTodos });
         set({ allTodosSelected: false });
