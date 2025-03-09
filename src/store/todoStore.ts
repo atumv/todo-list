@@ -56,7 +56,6 @@ export const useTodoStore = create<TodoState>()(
           set({ loading: false });
         } catch {
           set({ loading: false });
-          console.error('Failed to fetch data.');
         }
       },
 

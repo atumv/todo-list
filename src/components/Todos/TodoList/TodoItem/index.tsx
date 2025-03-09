@@ -13,7 +13,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, index }) => {
 
   return (
     <StyledTodoItem>
-      <li className="todo-list__item todo-item">
+      <li className="todo-list__item todo-item" data-testid="listitem">
         <div className="todo-item__checkbox-wrap">
           <input
             className="todo-item__checkbox"
@@ -37,6 +37,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, index }) => {
         <button
           className="todo-item__remove-btn remove-btn"
           onClick={() => removeTodo(todo.id)}
+          data-testid="removeButton"
         >
           &times;
         </button>

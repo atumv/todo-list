@@ -22,6 +22,7 @@ export const TodoStatus: React.FC<TodoStatusProps> = ({
       value={value}
       onChange={onChange}
       id={id}
+      data-testid="todoStatus"
     />
   );
 };

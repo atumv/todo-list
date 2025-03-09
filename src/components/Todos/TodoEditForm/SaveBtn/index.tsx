@@ -14,6 +14,7 @@ export const SaveBtn: React.FC<SaveBtnProps> = ({ value, onChange, id }) => (
     value={value}
     onChange={onChange}
     id={id}
+    data-testid="saveButton"
   >
     Сохранить
   </StyledSaveBtn>

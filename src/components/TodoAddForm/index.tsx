@@ -24,6 +24,7 @@ export const TodoAddForm: React.FC = () => {
                 type="text"
                 placeholder="Что нужно сделать?"
                 size="large"
+                data-testid="addInput"
               />
             </Form.Item>
             <Form.Item name="button">

@@ -13,9 +13,10 @@ export const TodoDescription: React.FC<TodoDescriptionProps> = ({
   id,
 }) => (
   <StyledTodoDescription
-    autoSize={{ minRows: 11, maxRows: 11 }}
+    style={{ height: 300, resize: 'none' }}
     value={value}
     onChange={onChange}
     id={id}
+    data-testid="todoDescription"
   />
 );

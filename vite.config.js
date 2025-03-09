@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import * as path from "path";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import * as path from 'path';
 
 export default defineConfig({
   plugins: [react()],
@@ -8,13 +8,17 @@ export default defineConfig({
     port: 3000,
     open: true,
   },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+  },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
-      "@components": path.resolve(__dirname, "src/components"),
-      "@shared": path.resolve(__dirname, "src/shared"),
-      "@app": path.resolve(__dirname, "src/app"),
-      "@styles": path.resolve(__dirname, "src/styles"),
+      '@': path.resolve(__dirname, 'src'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@shared': path.resolve(__dirname, 'src/shared'),
+      '@app': path.resolve(__dirname, 'src/app'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
     },
   },
 });

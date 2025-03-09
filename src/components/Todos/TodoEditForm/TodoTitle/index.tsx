@@ -12,5 +12,12 @@ export const TodoTitle: React.FC<TodoTitleProps> = ({
   onChange,
   id,
 }) => {
-  return <StyledTodoTitle value={value} onChange={onChange} id={id} />;
+  return (
+    <StyledTodoTitle
+      value={value}
+      onChange={onChange}
+      id={id}
+      data-testid="todoTitle"
+    />
+  );
 };
