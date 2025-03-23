@@ -72,14 +72,22 @@ export const useTodoStore = create<TodoState>()(
       },
 
       selectTodo(id) {
-        const todosWithOneSelected = get().todos.map((todo: Todo) => {
-          todo.id === id
-            ? (todo.attributes.selected = true)
-            : (todo.attributes.selected = false);
-          return todo;
+        set({
+          todos: get().todos.map((todo: Todo) => {
+            todo.id === id
+              ? (todo.attributes.selected = true)
+              : (todo.attributes.selected = false);
+            return todo;
+          }),
         });
-
-        set({ todos: todosWithOneSelected });
+        set({
+          allTodos: get().allTodos.map((todo: Todo) => {
+            todo.id === id
+              ? (todo.attributes.selected = true)
+              : (todo.attributes.selected = false);
+            return todo;
+          }),
+        });
       },
 
       editTodo(form) {
