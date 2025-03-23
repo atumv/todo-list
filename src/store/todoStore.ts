@@ -77,15 +77,13 @@ export const useTodoStore = create<TodoState>()(
         set({ allTodos: get().todos });
       },
 
-      selectTodo(index) {
-        const todosWithOneSelected = get().todos.map(
-          (todo: Todo, idx: number) => {
-            idx === index
-              ? (todo.attributes.selected = true)
-              : (todo.attributes.selected = false);
-            return todo;
-          }
-        );
+      selectTodo(id) {
+        const todosWithOneSelected = get().todos.map((todo: Todo) => {
+          todo.id === id
+            ? (todo.attributes.selected = true)
+            : (todo.attributes.selected = false);
+          return todo;
+        });
 
         set({ todos: todosWithOneSelected });
       },
