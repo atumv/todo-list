@@ -4,6 +4,7 @@ export interface Todo {
     status: string;
     title: string;
     description: string;
+    selected?: boolean;
   };
 }
 
