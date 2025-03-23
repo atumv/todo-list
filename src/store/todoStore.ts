@@ -9,8 +9,8 @@ interface TodoState {
   completedTodos: Todo[];
   uncompletedTodos: Todo[];
   favoriteTodos: Todo[];
-  currentPage: number;
-  pageCount: number;
+  page: number;
+  lastPage: number;
   allTodosSelected: boolean;
   loading: boolean;
   TodoListFilterValue: string;
@@ -34,8 +34,8 @@ export const useTodoStore = create<TodoState>()(
       completedTodos: [],
       uncompletedTodos: [],
       favoriteTodos: [],
-      currentPage: 0,
-      pageCount: 0,
+      page: 0,
+      lastPage: 0,
       allTodosSelected: true,
       loading: false,
       TodoListFilterValue: '',
@@ -45,8 +45,8 @@ export const useTodoStore = create<TodoState>()(
           set({ loading: true });
           const response = await fetch(`${API_URL}?_page=1&_per_page=25`);
           const result = await response.json();
-          set({ currentPage: result.first });
-          set({ pageCount: result.pages });
+          set({ page: result.first });
+          set({ lastPage: result.last });
           set({ todos: result.data });
           set({ allTodos: result.data });
           set({ loading: false });
@@ -124,10 +124,10 @@ export const useTodoStore = create<TodoState>()(
       },
 
       async loadMoreTodos() {
-        if (get().allTodosSelected && get().currentPage < get().pageCount) {
-          set({ currentPage: get().currentPage + 1 });
+        if (get().allTodosSelected && get().page !== get().lastPage) {
+          set({ page: ++get().page });
           const response = await fetch(
-            `${API_URL}?_page=${get().currentPage}&_per_page=25`
+            `${API_URL}?_page=${get().page}&_per_page=25`
           );
           const result = await response.json();
           const newTodos = result.data;
