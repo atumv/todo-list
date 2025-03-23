@@ -24,12 +24,8 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, index }) => {
           <span className="todo-item__number">{index + 1}</span>
           <span
             className={
-              (todo.attributes.status === 'Избранное' &&
-                'todo-item__title todo-item__title--blue') ||
               (todo.attributes.status === 'favorite' &&
                 'todo-item__title todo-item__title--blue') ||
-              (todo.attributes.status === 'Выполнена' &&
-                'todo-item__title todo-item__title--green') ||
               (todo.attributes.status === 'completed' &&
                 'todo-item__title todo-item__title--green') ||
               'todo-item__title todo-item__title--grey'

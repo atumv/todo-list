@@ -27,9 +27,7 @@ export const TodoEditForm: React.FC = () => {
         title: selectedTodo.attributes.title,
         description: selectedTodo.attributes.description,
         status:
-          (selectedTodo.attributes.status === 'Выполнена' && 'Выполнена') ||
           (selectedTodo.attributes.status === 'completed' && 'Выполнена') ||
-          (selectedTodo.attributes.status === 'Избранное' && 'Избранное') ||
           (selectedTodo.attributes.status === 'favorite' && 'Избранное') ||
           'Не выполнена',
       });

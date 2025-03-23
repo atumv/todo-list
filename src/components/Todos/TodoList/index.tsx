@@ -9,25 +9,14 @@ import { StyledTodoListContainer } from './styles';
 import InfiniteScroll from 'react-infinite-scroller';
 
 export const TodoList: React.FC = () => {
-  const {
-    todos,
-    loading,
-    loadMoreTodos,
-    allTodosSelected,
-    currentPage,
-    pageCount,
-  } = useTodoStore();
+  const { todos, loading, loadMoreTodos } = useTodoStore();
 
   return (
     <StyledTodoListContainer>
       <TodoListFilter />
       <ul className="todo-list">
         <InfiniteScroll
-          loadMore={
-            allTodosSelected && currentPage <= pageCount
-              ? loadMoreTodos
-              : () => {}
-          }
+          loadMore={loadMoreTodos}
           hasMore={true}
           threshold={1}
           initialLoad={false}

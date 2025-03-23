@@ -34,7 +34,7 @@ export const useTodoStore = create<TodoState>()(
       completedTodos: [],
       uncompletedTodos: [],
       favoriteTodos: [],
-      currentPage: 1,
+      currentPage: 0,
       pageCount: 0,
       allTodosSelected: true,
       loading: false,
@@ -43,14 +43,10 @@ export const useTodoStore = create<TodoState>()(
       async fetchTodos() {
         try {
           set({ loading: true });
-          const response = await fetch(`${API_URL}?pagination[page]=1`);
+          const response = await fetch(`${API_URL}?_page=1&_per_page=25`);
           const result = await response.json();
-          set({
-            currentPage: result.meta.pagination.page,
-          });
-          set({
-            pageCount: result.meta.pagination.pageCount,
-          });
+          set({ currentPage: result.first });
+          set({ pageCount: result.pages });
           set({ todos: result.data });
           set({ allTodos: result.data });
           set({ loading: false });
@@ -70,7 +66,7 @@ export const useTodoStore = create<TodoState>()(
         const newTodo = {
           id: Date.now(),
           attributes: {
-            status: 'Не выполнена',
+            status: 'uncompleted',
             title,
             description: '',
             selected: true,
@@ -130,14 +126,16 @@ export const useTodoStore = create<TodoState>()(
       },
 
       async loadMoreTodos() {
-        const response = await fetch(
-          `${API_URL}?pagination[page]=${get().currentPage}`
-        );
-        const result = await response.json();
-        const newTodos = result.data;
-        set({ currentPage: get().currentPage + 1 });
-        set({ todos: [...get().todos, ...newTodos] });
-        set({ allTodos: get().todos });
+        if (get().allTodosSelected && get().currentPage < get().pageCount) {
+          set({ currentPage: get().currentPage + 1 });
+          const response = await fetch(
+            `${API_URL}?_page=${get().currentPage}&_per_page=25`
+          );
+          const result = await response.json();
+          const newTodos = result.data;
+          set({ todos: [...get().todos, ...newTodos] });
+          set({ allTodos: get().todos });
+        }
       },
 
       showAllTodos() {
@@ -147,14 +145,9 @@ export const useTodoStore = create<TodoState>()(
       },
 
       showCompletedTodos() {
-        const completedTodos = get().allTodos.filter((todo: Todo) => {
-          if (
-            todo.attributes.status === 'Выполнена' ||
-            todo.attributes.status === 'completed'
-          ) {
-            return todo;
-          }
-        });
+        const completedTodos = get().allTodos.filter(
+          (todo: Todo) => todo.attributes.status === 'completed'
+        );
         set({ completedTodos: completedTodos });
         set({ todos: get().completedTodos });
         set({ allTodosSelected: false });
@@ -162,14 +155,9 @@ export const useTodoStore = create<TodoState>()(
       },
 
       showUncompletedTodos() {
-        const uncompletedTodos = get().allTodos.filter((todo: Todo) => {
-          if (
-            todo.attributes.status === 'Не выполнена' ||
-            todo.attributes.status === 'active'
-          ) {
-            return todo;
-          }
-        });
+        const uncompletedTodos = get().allTodos.filter(
+          (todo: Todo) => todo.attributes.status === 'uncompleted'
+        );
         set({ uncompletedTodos: uncompletedTodos });
         set({ todos: get().uncompletedTodos });
         set({ allTodosSelected: false });
@@ -177,14 +165,9 @@ export const useTodoStore = create<TodoState>()(
       },
 
       showFavoriteTodos() {
-        const favoriteTodos = get().allTodos.filter((todo: Todo) => {
-          if (
-            todo.attributes.status === 'Избранное' ||
-            todo.attributes.status === 'favorite'
-          ) {
-            return todo;
-          }
-        });
+        const favoriteTodos = get().allTodos.filter(
+          (todo: Todo) => todo.attributes.status === 'favorite'
+        );
         set({ favoriteTodos: favoriteTodos });
         set({ todos: get().favoriteTodos });
         set({ allTodosSelected: false });
