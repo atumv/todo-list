@@ -6,9 +6,6 @@ import { API_URL } from '@shared/constants/api';
 interface TodoState {
   todos: Todo[];
   allTodos: Todo[];
-  completedTodos: Todo[];
-  uncompletedTodos: Todo[];
-  favoriteTodos: Todo[];
   page: number;
   lastPage: number;
   allTodosSelected: boolean;
@@ -31,9 +28,6 @@ export const useTodoStore = create<TodoState>()(
     (set, get) => ({
       todos: [],
       allTodos: [],
-      completedTodos: [],
-      uncompletedTodos: [],
-      favoriteTodos: [],
       page: 0,
       lastPage: 0,
       allTodosSelected: true,
@@ -104,23 +98,10 @@ export const useTodoStore = create<TodoState>()(
       },
 
       removeTodo(id) {
-        const todos = get().todos.filter((todo: Todo) => todo.id !== id);
         const allTodos = get().allTodos.filter((todo: Todo) => todo.id !== id);
-        const completedTodos = get().completedTodos.filter(
-          (todo: Todo) => todo.id !== id
-        );
-        const uncompletedTodos = get().uncompletedTodos.filter(
-          (todo: Todo) => todo.id !== id
-        );
-        const favoriteTodos = get().favoriteTodos.filter(
-          (todo: Todo) => todo.id !== id
-        );
-
-        set({ todos: todos });
+        const todos = get().todos.filter((todo: Todo) => todo.id !== id);
         set({ allTodos: allTodos });
-        set({ completedTodos: completedTodos });
-        set({ uncompletedTodos: uncompletedTodos });
-        set({ favoriteTodos: favoriteTodos });
+        set({ todos: todos });
       },
 
       async loadMoreTodos() {
@@ -146,8 +127,7 @@ export const useTodoStore = create<TodoState>()(
         const completedTodos = get().allTodos.filter(
           (todo: Todo) => todo.attributes.status === 'completed'
         );
-        set({ completedTodos: completedTodos });
-        set({ todos: get().completedTodos });
+        set({ todos: completedTodos });
         set({ allTodosSelected: false });
         set({ TodoListFilterValue: 'Выполненные' });
       },
@@ -156,8 +136,7 @@ export const useTodoStore = create<TodoState>()(
         const uncompletedTodos = get().allTodos.filter(
           (todo: Todo) => todo.attributes.status === 'uncompleted'
         );
-        set({ uncompletedTodos: uncompletedTodos });
-        set({ todos: get().uncompletedTodos });
+        set({ todos: uncompletedTodos });
         set({ allTodosSelected: false });
         set({ TodoListFilterValue: 'Не выполненные' });
       },
@@ -166,8 +145,7 @@ export const useTodoStore = create<TodoState>()(
         const favoriteTodos = get().allTodos.filter(
           (todo: Todo) => todo.attributes.status === 'favorite'
         );
-        set({ favoriteTodos: favoriteTodos });
-        set({ todos: get().favoriteTodos });
+        set({ todos: favoriteTodos });
         set({ allTodosSelected: false });
         set({ TodoListFilterValue: 'Избранное' });
       },
