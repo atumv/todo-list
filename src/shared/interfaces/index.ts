@@ -4,10 +4,6 @@ export interface Todo {
     status: string;
     title: string;
     description: string;
-    createdAt?: string;
-    updatedAt?: string;
-    publishedAt?: string;
-    selected?: boolean;
   };
 }
 
