@@ -16,7 +16,7 @@ interface TodoState {
   TodoListFilterValue: string;
   fetchTodos: () => void;
   addTodo: (title: string) => void;
-  selectTodo: (index: number) => void;
+  selectTodo: (id: number) => void;
   editTodo: (form: EditForm) => void;
   removeTodo: (id: number) => void;
   loadMoreTodos: () => void;
