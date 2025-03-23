@@ -19,7 +19,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, index }) => {
             className="todo-item__checkbox"
             type="checkbox"
             checked={todo.attributes.selected || false}
-            onChange={() => selectTodo(index)}
+            onChange={() => selectTodo(todo.id)}
           />
           <span className="todo-item__number">{index + 1}</span>
           <span
