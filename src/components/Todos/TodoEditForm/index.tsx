@@ -26,10 +26,7 @@ export const TodoEditForm: React.FC = () => {
       form.setFieldsValue({
         title: selectedTodo.attributes.title,
         description: selectedTodo.attributes.description,
-        status:
-          (selectedTodo.attributes.status === 'completed' && 'Выполнена') ||
-          (selectedTodo.attributes.status === 'favorite' && 'Избранное') ||
-          'Не выполнена',
+        status: selectedTodo.attributes.status,
       });
     }
   }, [todos]);

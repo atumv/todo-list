@@ -15,9 +15,9 @@ export const TodoStatus: React.FC<TodoStatusProps> = ({
   return (
     <StyledSelect
       options={[
-        { value: 'Не выполнена', label: 'Не выполнена' },
-        { value: 'Выполнена', label: 'Выполнена' },
-        { value: 'Избранное', label: 'Избранное' },
+        { value: 'uncompleted', label: 'Не выполнена' },
+        { value: 'completed', label: 'Выполнена' },
+        { value: 'favorite', label: 'Избранное' },
       ]}
       value={value ? value : 'Статус задачи'}
       onChange={onChange}
