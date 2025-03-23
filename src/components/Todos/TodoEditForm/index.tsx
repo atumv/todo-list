@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Todo, EditFormValues } from '@shared/interfaces';
+import { Todo, EditForm } from '@shared/interfaces';
 import { useTodoStore } from '@/store/todoStore';
 import { StyledTodoEdit } from './styles';
 import { Form } from 'antd';
@@ -34,8 +34,8 @@ export const TodoEditForm: React.FC = () => {
     }
   }, [todos]);
 
-  const handleFormSubmit = (values: EditFormValues): void => {
-    editTodo(values);
+  const handleFormSubmit = (form: EditForm): void => {
+    editTodo(form);
   };
 
   return (

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { Todo, EditFormValues } from '@shared/interfaces';
+import { Todo, EditForm } from '@shared/interfaces';
 import { API_URL } from '@shared/constants/api';
 
 interface TodoState {
@@ -17,7 +17,7 @@ interface TodoState {
   fetchTodos: () => void;
   addTodo: (title: string) => void;
   selectTodo: (index: number) => void;
-  editTodo: (values: EditFormValues) => void;
+  editTodo: (form: EditForm) => void;
   removeTodo: (id: number) => void;
   loadMoreTodos: () => void;
   showAllTodos: () => void;
@@ -90,8 +90,8 @@ export const useTodoStore = create<TodoState>()(
         set({ todos: todosWithOneSelected });
       },
 
-      editTodo(values) {
-        const { title, description, status } = values;
+      editTodo(form) {
+        const { title, description, status } = form;
 
         const todosWithOneChanged = get().allTodos.map((todo: Todo) => {
           if (todo.attributes.selected) {

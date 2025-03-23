@@ -11,7 +11,7 @@ export interface Todo {
   };
 }
 
-export interface EditFormValues {
+export interface EditForm {
   title: string;
   description: string;
   status: string;
